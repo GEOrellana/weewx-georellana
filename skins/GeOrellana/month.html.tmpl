@@ -1,0 +1,190 @@
+#errorCatcher Echo
+   
+         <!-- PAGINA -->
+  		<div class="row-fluid">
+  		
+  		  <!-- SIDEBAR -->
+  		  <div class="col-md-4"> 
+          <!-- RESUMEN MES -->
+            <h3>Este mes</h3>  
+            <table class="table table-striped mitad">
+	            <tbody>
+	              <tr>
+	                <th>
+	                  Temperatura m&aacute;xima<br/>
+	                  Temperatura m&iacute;nima
+	                </th>
+	                <td>
+	                  $month.outTemp.max el $month.outTemp.maxtime<br/>
+	                  $month.outTemp.min el $month.outTemp.mintime
+	                </td>
+	              </tr>
+	              <tr>
+	                <th>
+	                  &Iacute;ndice humidex m&aacute;ximo<br/>
+	                  Sensaci&oacute;n t&eacute;rmica m&iacute;nima
+	                </th>
+	                <td> 
+	                  $month.heatindex.max el $month.heatindex.maxtime<br>
+	                  $month.windchill.min el $month.windchill.mintime	                  
+	                </td>
+	              </tr>
+	              <tr>
+	                <th>
+	                  Humedad m&aacute;xima<br/>
+	                  Humedad m&iacute;inima
+	                </th>
+	                <td>
+	                  $month.outHumidity.max el $month.outHumidity.maxtime<br/>
+	                  $month.outHumidity.min el $month.outHumidity.mintime
+	                </td>
+	              </tr>
+	              <tr>
+	                <th>
+	                  Punto de roc&iacute;o alto<br/>
+	                  Punto de roc&iacute;o bajo
+	                </th>
+	                <td>
+	                  $month.dewpoint.max el $month.dewpoint.maxtime<br/>
+	                  $month.dewpoint.min el $month.dewpoint.mintime
+	                </td>
+	              </tr>
+	              <tr>
+	                <th>
+	                  Bar&oacute;metro alto<br/>
+	                  Bar&oacute;metro bajo
+	                </th>
+	                <td>
+	                  $month.barometer.max el $month.barometer.maxtime<br/>
+	                  $month.barometer.min el $month.barometer.mintime
+	                </td>
+	              </tr>
+	              <tr>
+	                <th>
+	                  Precipitaci&oacute;n
+	                </th>
+	                <td>
+	                  $month.rain.sum
+	                </td>
+	              </tr>
+	              <tr>
+	                <th> 
+	                  Tasa de precipitaci&oacute;n m&aacute;xima
+	                </th>
+	                <td>
+	                  $month.rainRate.max el $month.rainRate.maxtime
+	                </td>
+	              </tr>
+	              <tr>
+	                <th>
+	                  Velocidad viento m&aacute;ximo
+	                </th>
+	                <td>
+	                  $month.wind.max desde $month.wind.gustdir el $month.wind.maxtime
+	                </td>
+	              </tr>
+	              <tr>
+	                <th>
+	                  Velocidad viento promedio
+	                </th>
+	                <td>
+	                  $month.wind.avg
+	                </td>
+	              </tr>
+	              
+	              <tr>
+	                <th>
+	                  Media cuadr&aacute;tica viento
+	                </th>
+	                <td>
+	                  $month.wind.rms
+	                </td>
+	              </tr>
+	
+	              <tr>
+	                <th>
+	                  Velocidad media del vector<br/>
+	                  Direcci&oacute;n media del vector
+	                </th>
+	                <td>
+	                  $month.wind.vecavg<br/>
+	                  $month.wind.vecdir
+	                </td>
+	              </tr>
+	              <tr>
+	                <th>
+	                  Temperatura interior m&aacute;xima<br/>
+	                  Temperatura interior m&iacute;nima
+	                </th>
+	                <td>
+	                  $month.inTemp.max el $month.inTemp.maxtime<br/>
+	                  $month.inTemp.min el $month.inTemp.mintime
+	                </td>
+	              </tr>
+	              #if $month.UV.has_data
+	              <tr>
+	                <th>
+	                  Radiaci&oacute;n ultravioleta m&aacute;xima<br/>
+	                  Radiaci&oacute;n ultravioleta m&iacute;nima
+	                </th>
+	                <td>
+	                  $month.UV.max el $month.UV.maxtime<br/>
+	                  $month.UV.min el $month.UV.mintime
+	                </td>
+	              </tr>
+	              #end if
+	              #if $month.ET.has_data and $month.ET.sum.raw > 0.0
+	              <tr>
+	                <th>
+	                  Evapotranspiraci&oacute;n m&aacute;xima<br/>
+	                  Evapotranspiraci&oacute;n m&iacute;nima
+	                </th>
+	                <td>
+	                  $month.ET.max el $month.ET.maxtime<br/>
+	                  $month.ET.min el $month.ET.mintime
+	                </td>
+	              </tr>
+	              #end if
+	              #if $month.radiation.has_data
+	              <tr>
+	                <th>
+	                  Radiaci&oacute;n m&aacute;xima<br/>
+	                  Radiaci&oacute;n m&iacute;nima
+	                </th>
+	                <td>
+	                  $month.radiation.max el $month.radiation.maxtime<br/>
+	                  $month.radiation.min el $month.radiation.mintime
+	                </td>
+	              </tr>
+	              #end if
+	            </tbody>
+	         </table>
+        </div>
+        
+        <!-- MAIN CONTENT--> 
+        <div class="col-md-8">
+        
+            <h3>
+              Gr&aacute;ficos de este mes
+            </h3>
+	          <img src="monthtempdew.png?${$station.os_uptime}" alt="Temperatura" class="img-plot"/>
+		       <img src="monthhumidity.png?${$station.os_uptime}"   alt="humedad" class="img-plot"/>	          
+	          <img src="monthtempchill.png?${$station.os_uptime}" alt="heatchill" class="img-plot" />
+	          <img src="monthrain.png?${$station.os_uptime}" alt="precipitacion" class="img-plot"/>
+	          <img src="monthwind.png?${$station.os_uptime}" alt="viento" class="img-plot"/>
+	          <img src="monthbarometer.png?${$station.os_uptime}" alt="barometer" class="img-plot"/>
+	          <img src="monthwinddir.png?${$station.os_uptime}" alt="Hi Wind"  class="img-plot"/>
+	          <img src="monthinside.png?${$station.os_uptime}" alt="interior"  class="img-plot"/>
+	          <img src="monthwindvec.png?${$station.os_uptime}" alt="vector viento"  class="img-plot"/>
+	          #if $month.radiation.has_data
+	          <img src="monthradiation.png?${$station.os_uptime}" alt="radiaci&oacute;n"  class="img-plot"/>
+	          #end if
+	          #if $month.UV.has_data
+	          <img src="monthuv.png?${$station.os_uptime}" alt="UV Index"  class="img-plot"/>
+	          #end if
+	          #if $month.rxCheckPercent.has_data
+	          <img src="monthrx.png?${$station.os_uptime}" alt="month rx percent"  class="img-plot"/>
+	          #end if
+        </div>
+      </div>
+    

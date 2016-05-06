@@ -1,0 +1,138 @@
+#errorCatcher Echo
+         <!-- MAIN CONTENT-->  		  
+<div class="container-fluid">
+  <div class="row-fluid">
+  	<div class="col-md-6">
+  	<h3>Calendario solar</h3>          
+     <table class="table table-striped sunmoon">
+        <tbody>
+            ##if $almanac.hasExtras
+			   ## Extended almanac information is available. Do the full set of tables.
+			   #set $sun_altitude = $almanac.sun.alt
+			   #if $sun_altitude < 0
+			   #set $sun_None="<i>(Always down)</i>"
+			   #else
+			   #set $sun_None="<i>(Always up)</i>"
+			   #end if
+          <tr>
+            <th>Inicio madrugada</th>
+            <td>$almanac(horizon=-6).sun(use_center=1).rise</td>
+          </tr>
+          <tr>
+	         <th>Salida del sol</th>
+	         <td>$almanac.sun.rise.string($sun_None)</td>
+          </tr>
+          <tr>
+            <th>Tr&aacute;nsito</th>
+            <td>$almanac.sun.transit</td>
+          </tr>
+          <tr>
+            <th>Puesta del sol</th>
+            <td>$almanac.sun.set.string($sun_None)</td>
+          </tr>
+          <tr>
+            <th>Fin crep&uacute;sculo</th>
+            <td>$almanac(horizon=-6).sun(use_center=1).set</td>
+          </tr>
+          <tr>
+            <th>Acimut</th>
+            <td>$("%.1f&deg;" % $almanac.sun.az)</td>
+          </tr>
+          <tr>
+            <th>Altitud</th>
+            <td>$("%.1f&deg;" % $sun_altitude)</td>
+          </tr> 
+          <tr>         
+            <th>Ascensi&oacute;n recta</th>
+            <td>$("%.1f&deg;" % $almanac.sun.ra)</td>
+          </tr>  
+          <tr>
+            <th>Declinaci&oacute;n</th>
+            <td>$("%.1f&deg;" % $almanac.sun.dec)</td>
+          </tr>      
+          #if $almanac.next_equinox.raw < $almanac.next_solstice.raw
+          ## The equinox is before the solstice. Display them in order.
+          <tr>
+            <th>Equinoccio</th>
+            <td>$almanac.next_equinox</td>
+          </tr>  
+          <tr>
+            <th>Solsticio</th>
+            <td>$almanac.next_solstice</td>
+          </tr>
+          #else
+          ## The solstice is before the equinox. Display them in order.
+          <tr>
+            <th>Solsticio</th>
+            <td class="data">$almanac.next_solstice</td>
+          </tr>
+          <tr>
+            <th>Equinoccio</th>
+            <td class="data">$almanac.next_equinox</td>
+          </tr>
+          #end if
+          
+          </tbody>
+        </table>
+    </div>  
+    
+    <div class="col-md-6">          
+    <h3>Calendario lunar</h3>
+     <table class="table table-striped sunmoon">
+        <tbody>
+          <tr>
+            <th>Salida de la luna</th>
+            <td>$almanac.moon.rise</td>
+          </tr>
+          <tr>
+            <th>Tr&aacute;nsito</th>
+            <td>$almanac.moon.transit</td>
+          </tr>
+          <tr>
+            <th>Puesta de la luna</th>
+            <td>$almanac.moon.set</td>
+          </tr>
+          <tr>
+            <th>Acimut</th>
+            <td>$("%.1f&deg;" % $almanac.moon.az)</td>
+          </tr>
+          <tr>
+            <th>Altitud</th>
+            <td>$("%.1f&deg;" % $almanac.moon.alt)</td>
+          </tr>
+          <tr>
+            <th>Ascensi&oacute;n recta</th>
+            <td>$("%.1f&deg;" % $almanac.moon.ra)</td>
+          </tr>
+          <tr>
+            <th>Declinaci&oacute;n</th>
+            <td>$("%.1f&deg;" % $almanac.moon.dec)</td>
+          </tr> 
+          #if $almanac.next_full_moon.raw < $almanac.next_new_moon.raw
+          <tr>
+            <th>Luna llena</th>
+            <td>$almanac.next_full_moon</td>
+          </tr>
+          <tr>
+            <th>Luna nueva</th>
+            <td>$almanac.next_new_moon</td>
+          </tr>
+          #else
+          <tr>
+            <th>Luna nueva</th>
+            <td>$almanac.next_new_moon</td>
+          </tr>
+          <tr>
+            <th>Luna llena</th>
+            <td>$almanac.next_full_moon</td>
+          </tr>
+          #end if
+          <tr>
+            <th>Fase</th>
+            <td>$almanac.moon_phase<br/>($almanac.moon_fullness% lleno)</td>
+          </tr>                                       
+        </tbody>
+       </table>
+    </div>          
+   </div> 
+</div>

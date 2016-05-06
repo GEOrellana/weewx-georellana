@@ -1,0 +1,188 @@
+#errorCatcher Echo
+
+      <!-- PAGINA -->
+  		<div class="row-fluid">
+  		
+  		  <!-- SIDEBAR -->
+  		  <div class="col-md-4"> 
+          <!-- RESUMEN SEMANA -->
+            <h3>Esta semana</h3>
+              <table class="table table-striped mitad">
+		         <tbody>
+		           <tr>
+		             <th>
+	                  Temperatura m&aacute;xima<br/>
+	                  Temperatura m&iacute;nima
+		             </th>
+		             <td>
+		               $week.outTemp.max a las $week.outTemp.maxtime<br/>
+		               $week.outTemp.min a las $week.outTemp.mintime
+		             </td>
+		           </tr>
+		           <tr>
+		             <th>
+	                  &Iacute;ndice humidex m&aacute;ximo<br/>
+	                  Sensaci&oacute;n t&eacute;rmica m&iacute;nima
+		             </th>
+		             <td> 
+		               $week.heatindex.max a las $week.heatindex.maxtime<br>
+		               $week.windchill.min a las $week.windchill.mintime
+		             </td>
+		           </tr>
+		           <tr>
+		             <th>
+	                  Humedad m&aacute;xima<br/>
+	                  Humedad m&iacute;inima
+		             </th>
+		             <td>
+		               $week.outHumidity.max a las $week.outHumidity.maxtime<br/>
+		               $week.outHumidity.min a las $week.outHumidity.mintime
+		             </td>
+		           </tr>
+		           <tr>
+		             <th>
+	                  Punto de roc&iacute;o alto<br/>
+	                  Punto de roc&iacute;o bajo
+		             </th>
+		             <td>
+		               $week.dewpoint.max a las $week.dewpoint.maxtime<br/>
+		               $week.dewpoint.min a las $week.dewpoint.mintime
+		             </td>
+		           </tr>
+		           <tr>
+		             <th>
+	                  Bar&oacute;metro alto<br/>
+	                  Bar&oacute;metro bajo
+		             </th>
+		             <td>
+		               $week.barometer.max a las $week.barometer.maxtime<br/>
+		               $week.barometer.min a las $week.barometer.mintime
+		             </td>
+		           </tr>
+		           <tr>
+		             <th>
+		               Precipitaci&oacute;n
+		             </th>
+		             <td>
+		               $week.rain.sum
+		             </td>
+		           </tr>
+		           <tr>
+		             <th> 
+		               Tasa de precipitaci&oacute;n m&aacute;xima
+		             </th>
+		             <td>
+		               $week.rainRate.max a las $week.rainRate.maxtime
+		             </td>
+		           </tr>
+		           <tr>
+		             <th>
+		               Velocidad viento m&aacute;ximo
+		             </th>
+		             <td>
+		               $week.wind.max desde $week.wind.gustdir a las $week.wind.maxtime
+		             </td>
+		           </tr>
+		           <tr>
+		             <th>
+		               Velocidad viento promedio
+		             </th>
+		             <td>
+		               $week.wind.avg
+		             </td>
+		           </tr>
+		           
+		           <tr>
+		             <th>
+		               Media cuadr&aacute;tica viento
+		             </th>
+		             <td>
+		               $week.wind.rms
+		             </td>
+		           </tr>
+		
+		           <tr>
+		             <th>
+	                  Velocidad media del vector<br/>
+	                  Direcci&oacute;n media del vector
+		             </th>
+		             <td>
+		               $week.wind.vecavg<br/>
+		               $week.wind.vecdir
+		             </td>
+		           </tr>
+		           <tr>
+		             <th>
+	                  Temperatura interior m&aacute;xima<br/>
+	                  Temperatura interior m&iacute;nima
+		             </th>
+		             <td>
+		               $week.inTemp.max a las $week.inTemp.maxtime<br/>
+		               $week.inTemp.min a las $week.inTemp.mintime
+		             </td>
+		           </tr>
+		           #if $week.UV.has_data
+		           <tr>
+		             <th>
+	                  Radiaci&oacute;n ultravioleta m&aacute;xima<br/>
+	                  Radiaci&oacute;n ultravioleta m&iacute;nima
+		             </th>
+		             <td>
+		               $week.UV.max a las $week.UV.maxtime<br/>
+		               $week.UV.min a las $week.UV.mintime
+		             </td>
+		           </tr>
+		           #end if
+		           #if $week.ET.has_data and $week.ET.sum.raw > 0.0
+		           <tr>
+		             <th>
+	                  Evapotranspiraci&oacute;n m&aacute;xima<br/>
+	                  Evapotranspiraci&oacute;n m&iacute;nima
+		             </th>
+		             <td>
+		               $week.ET.max a las $week.ET.maxtime<br/>
+		               $week.ET.min a las $week.ET.mintime
+		             </td>
+		           </tr>
+		           #end if
+		           #if $week.radiation.has_data
+		           <tr>
+		             <th>
+	                  Radiaci&oacute;n m&aacute;xima<br/>
+	                  Radiaci&oacute;n m&iacute;nima
+		             </th>
+		             <td>
+		               $week.radiation.max a las $week.radiation.maxtime<br/>
+		               $week.radiation.min a las $week.radiation.mintime
+		             </td>
+		           </tr>
+		           #end if
+		         </tbody>
+		       </table>
+        </div>
+        
+        <!-- MAIN CONTENT--> 
+        <div class="col-md-8">        
+            <h3>
+              Gr&aacute;ficos de esta semana
+            </h3>
+	          <img src="weektempdew.png?${$station.os_uptime}" alt="temperatures" class="img-plot"/>
+		       <img src="weekhumidity.png?${$station.os_uptime}"   alt="humedad" class="img-plot"/>	         
+	          <img src="weektempchill.png?${$station.os_uptime}" alt="heatchill" class="img-plot"/>
+	          <img src="weekrain.png?${$station.os_uptime}" alt="rain" class="img-plot"/>
+	          <img src="weekwind.png?${$station.os_uptime}" alt="wind" class="img-plot"/>
+	          <img src="weekbarometer.png?${$station.os_uptime}" alt="barometer" class="img-plot"/>
+	          <img src="weekwinddir.png?${$station.os_uptime}" alt="Hi Wind" class="img-plot"/>
+	          <img src="weekinside.png?${$station.os_uptime}" alt="Inside" class="img-plot"/>
+	          <img src="weekwindvec.png?${$station.os_uptime}" alt="Wind Vector" class="img-plot"/>
+	          #if $week.radiation.has_data
+	          <img src="weekradiation.png?${$station.os_uptime}" alt="Radiation" class="img-plot"/>
+	          #end if
+	          #if $week.UV.has_data
+	          <img src="weekuv.png?${$station.os_uptime}" alt="UV Index" class="img-plot"/>
+	          #end if
+	          #if $week.rxCheckPercent.has_data
+	          <img src="weekrx.png?${$station.os_uptime}" alt="week rx percent" class="img-plot"/>
+	          #end if
+        </div>
+      </div>

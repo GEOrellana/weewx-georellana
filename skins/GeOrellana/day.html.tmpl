@@ -1,0 +1,255 @@
+#errorCatcher Echo
+      <div class="row-fluid" > 
+
+        <div class="col-md-8 col-md-push-4"> 
+        <h3>Condiciones actuales</h3>
+          <!-- CONDICIONES ACTUALES -->    
+            <div class="row-fluid">
+            
+              <div class="col-md-6" style="padding-left: 0px;">
+		          <table class="table table-striped mitad">
+                  <tr>
+                    <th>Temperatura</th>
+	                 <td>$current.outTemp</td>
+	               </tr>
+	               <tr>
+	                 <th>Sensaci&oacute;n t&eacute;rmica</th>
+	                 <td>$current.windchill</td>
+  	               </tr>
+	               <tr>
+	                 <th>&Iacute;ndice Humidex</th>
+	                 <td>$current.heatindex</td>
+	              </tr>
+	              <tr>
+	                <th>Punto de roc&iacute;o</th>
+	                <td>$current.dewpoint</td>
+	              </tr>
+	              <tr>
+	                <th>Humedad relativa</th>
+	                <td>$current.outHumidity</td>
+	              </tr>
+	              <tr>
+	                <th>Presi&oacute;n atmosf&eacute;rica</th>
+	                <td>$current.barometer</td>
+	              </tr>
+	              <tr>
+	                <th>Tendencia presi&oacute;n ($trend.time_delta.hour.format("%.0f"))</th>
+	                <td>$trend.barometer</td>
+	              </tr>
+	            </table>            
+              </div>
+              
+              <div class="col-md-6"  style="padding-left: 0px;">
+               <table class="table table-striped mitad">
+                <tr>
+	                <th>Viento</th>
+	                <td>$current.windSpeed desde $current.windDir ($current.windDir.ordinal_compass)</td>
+	              </tr>
+	              <tr>
+	                <th>Intensidad de lluvia</th>
+	                <td>$current.rainRate</td>
+	              </tr>
+	              <tr>
+	                <th>Temperatura en la oficina JPCC</th>
+	                <td>$current.inTemp</td>
+	              </tr>
+	              #if $day.UV.has_data
+	              <tr>
+	                <th>Radiaci&oacute;n ultravioleta</th>
+	                <td>$current.UV</td>
+	              </tr>
+	              #end if
+	              #if $day.ET.has_data and $day.ET.sum.raw > 0.0
+	              <tr>
+	                <th>Evapotranspiraci&oacute;n</th>
+	                <td>$current.ET</td>
+	              </tr>
+	              #end if
+	              #if $day.radiation.has_data
+	              <tr>
+	                <th>Radiaci&oacute;n solar</th>
+	                <td>$current.radiation</td>
+	              </tr>
+	              #end if
+	              </table>
+              </div>          
+ 	        </div> 
+	        
+	        <div class="row-fluid">
+	        <div class="col-md-12"  style="padding-left: 0px;">
+		        <h3>Gr&aacute;ficos de hoy</h3>
+		          <img src="daytempdew.png?${$station.os_uptime}"   alt="temperatures" class="img-plot"/>
+		          <img src="dayhumidity.png?${$station.os_uptime}"   alt="humedad" class="img-plot"/>
+		          <img src="daytempchill.png?${$station.os_uptime}" alt="heatchill" class="img-plot" />
+		          <img src="dayrain.png?${$station.os_uptime}"      alt="rain" class="img-plot" />
+		          <img src="daywind.png?${$station.os_uptime}"      alt="wind" class="img-plot" />
+		          <img src="daybarometer.png?${$station.os_uptime}" alt="barometer" class="img-plot" />
+		          <img src="daywinddir.png?${$station.os_uptime}"   alt="Hi Wind" class="img-plot" />
+		          <img src="dayinside.png?${$station.os_uptime}"    alt="Inside" class="img-plot" />
+		          <img src="daywindvec.png?${$station.os_uptime}"   alt="Wind Vector"  class="img-plot"/>
+		          #if $day.radiation.has_data
+		          <img src="dayradiation.png?${$station.os_uptime}" alt="Radiation"  class="img-plot"/>
+		          #end if
+		          #if $day.UV.has_data
+		          <img src="dayuv.png?${$station.os_uptime}" alt="UV Index" class="img-plot" />
+		          #end if
+		          #if $day.rxCheckPercent.has_data
+		          <img src="dayrx.png?${$station.os_uptime}"        alt="day rx percent" class="img-plot"/>
+		          #end if
+		     </div>	    
+           </div> 
+       </div> <!-- fin contenido prinicipal-->
+    
+      <!-- SIDEBAR -->
+  		  <div class="col-md-4 col-md-pull-8" > 
+	        
+	       <!-- MIN MAX DIARIO -->
+          <h3>Desde media noche</h3>
+          <table class="table table-striped mitad">
+            <tbody>
+              <tr>
+                <th>
+                  Temperatura m&aacute;xima<br/>
+                  Temperatura m&iacute;nima
+                </th>
+                <td>
+                  $day.outTemp.max a las $day.outTemp.maxtime<br/>
+                  $day.outTemp.min a las $day.outTemp.mintime
+                </td>
+              </tr>
+              <tr>
+                <th>
+                  &Iacute;ndice humidex m&aacute;ximo<br/>
+                  Sensaci&oacute;n t&eacute;rmica m&iacute;nima
+                </th>
+                <td>
+                  $day.heatindex.max a las $day.heatindex.maxtime<br/>
+                  $day.windchill.min a las $day.windchill.mintime
+                </td>
+              </tr>
+              <tr>
+                <th>
+                  Humedad m&aacute;xima<br/>
+                  Humedad m&iacute;inima
+                </th>
+                <td>
+                  $day.outHumidity.max a las $day.outHumidity.maxtime<br/>
+                  $day.outHumidity.min a las $day.outHumidity.mintime
+                </td>
+              </tr>
+              <tr>
+                <th>
+	                  Punto de roc&iacute;o alto<br/>
+	                  Punto de roc&iacute;o bajo
+                </th>
+                <td>
+                  $day.dewpoint.max a las $day.dewpoint.maxtime<br/>
+                  $day.dewpoint.min a las $day.dewpoint.mintime
+                </td>
+              </tr>
+              <tr>
+                <th>
+                  Bar&oacute;metro alto<br/>
+                  Bar&oacute;metro bajo
+                </th>
+                <td>
+                  $day.barometer.max a las $day.barometer.maxtime<br/>
+                  $day.barometer.min a las $day.barometer.mintime
+                </td>
+              </tr>
+              <tr>
+                <th>Precipitaci&oacute;n</th>
+                <td>$day.rain.sum</td>
+              </tr>
+              <tr>
+                <th>Tasa de precipitaci&oacute;n m&aacute;xima</th>
+                <td>$day.rainRate.max a las $day.rainRate.maxtime</td>
+              </tr>
+              <tr>
+                <th>
+                  Velocidad viento m&aacute;ximo
+                </th>
+                <td>
+                  $day.wind.max desde $day.wind.gustdir a las $day.wind.maxtime
+                </td>
+              </tr>
+              <tr>
+                <th>
+                  Velocidad viento promedio
+                </th>
+                <td>
+                  $day.wind.avg
+                </td>
+              </tr>
+              <tr>
+                <th>
+                  Media cuadr&aacute;tica viento
+                </th>
+                <td>
+                  $day.wind.rms
+                </td>
+              </tr>
+
+              <tr>
+                <th>
+                  Velocidad media del vector<br/>
+                  Direcci&oacute;n media del vector
+                </th>
+                <td>
+                  $day.wind.vecavg<br/>
+                  $day.wind.vecdir
+                </td>
+              </tr>
+
+              <tr>
+                <th>
+                  Temperatura interior m&aacute;xima<br/>
+                  Temperatura interior m&iacute;nima
+                </th>
+                <td>
+                  $day.inTemp.max a las $day.inTemp.maxtime<br/>
+                  $day.inTemp.min a las $day.inTemp.mintime
+                </td>
+              </tr>
+              #if $day.UV.has_data
+              <tr>
+                <th>
+                  Radiaci&oacute;n ultravioleta m&aacute;xima<br/>
+                  Radiaci&oacute;n ultravioleta m&iacute;nima
+                </th>
+                <td>
+                  $day.UV.max a las $day.UV.maxtime<br/>
+                  $day.UV.min a las $day.UV.mintime
+                </td>
+              </tr>
+              #end if
+              #if $day.ET.has_data and $day.ET.sum.raw >0.0
+              <tr>
+                <th>
+                  Evapotranspiraci&oacute;n m&aacute;xima<br/>
+                  Evapotranspiraci&oacute;n m&iacute;nima
+                </th>
+                <td>
+                  $day.ET.max a las $day.ET.maxtime<br/>
+                  $day.ET.min a las $day.ET.mintime
+                </td>
+              </tr>
+              #end if
+              #if $day.radiation.has_data
+              <tr>
+                <th>
+                  Radiaci&oacute;n m&aacute;xima<br/>
+                  Radiaci&oacute;n m&iacute;nima
+                </th>
+                <td>
+                  $day.radiation.max a las $day.radiation.maxtime<br/>
+                  $day.radiation.min a las $day.radiation.mintime
+                </td>
+              </tr>
+              #end if
+            </tbody>
+          </table>
+         </div>
+              
+ </div> <!-- fin grid-->
+        

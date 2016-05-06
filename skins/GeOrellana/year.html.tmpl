@@ -1,0 +1,210 @@
+#errorCatcher Echo   
+      <!-- PAGINA -->
+  		<div class="row-fluid">
+  		
+  		  <!-- SIDEBAR -->
+  		  <div class="col-md-4"> 
+          <!-- RESUMEN -->
+            <h3>Este A&ntilde;o</h3>      
+              <table class="table table-striped mitad">
+	            <tbody>
+	              <tr>
+	                <th>
+	                  Temperatura m&aacute;xima<br/>
+	                  Temperatura m&iacute;nima
+	                </th>
+	                <td>
+	                  $year.outTemp.max el $year.outTemp.maxtime<br/>
+	                  $year.outTemp.min el $year.outTemp.mintime
+	                </td>
+	              </tr>
+	              <tr>
+	                <th>
+	                  &Iacute;ndice humidex m&aacute;ximo<br/>
+	                  Sensaci&oacute;n t&eacute;rmica m&iacute;nima
+	                </th>
+	                <td> 
+	                  $year.heatindex.max el $year.heatindex.maxtime<br>
+	                  $year.windchill.min el $year.windchill.mintime
+	                </td>
+	              </tr>
+	              <tr>
+	                <th>
+	                  Humedad m&aacute;xima<br/>
+	                  Humedad m&iacute;inima
+	                </th>
+	                <td>
+	                  $year.outHumidity.max el $year.outHumidity.maxtime<br/>
+	                  $year.outHumidity.min el $year.outHumidity.mintime
+	                </td>
+	              </tr>
+	              <tr>
+	                <th>
+	                  Punto de roc&iacute;o alto<br/>
+	                  Punto de roc&iacute;o bajo
+	                </th>
+	                <td>
+	                  $year.dewpoint.max el $year.dewpoint.maxtime<br/>
+	                  $year.dewpoint.min el $year.dewpoint.mintime
+	                </td>
+	              </tr>
+	              <tr>
+	                <th>
+	                  Bar&oacute;metro alto<br/>
+	                  Bar&oacute;metro bajo
+	                </th>
+	                <td>
+	                  $year.barometer.max el $year.barometer.maxtime<br/>
+	                  $year.barometer.min el $year.barometer.mintime
+	                </td>
+	              </tr>
+	              <tr>
+	                <th>
+	                  Precipitaci&oacute;n
+	                </th>
+	                <td>
+	                  $year.rain.sum
+	                </td>
+	              </tr>
+	              <tr>
+	                <th> 
+	                  Tasa de precipitaci&oacute;n m&aacute;xima
+	                </th>
+	                <td>
+	                  $year.rainRate.max el $year.rainRate.maxtime
+	                </td>
+	              </tr>
+	              <tr>
+	                <th>
+	                  Velocidad viento m&aacute;ximo
+	                </th>
+	                <td>
+	                  $year.wind.max desde $year.wind.gustdir el $year.wind.maxtime
+	                </td>
+	              </tr>
+	              <tr>
+	                <th>
+	                  Velocidad viento promedio
+	                </th>
+	                <td>
+	                  $year.wind.avg
+	                </td>
+	              </tr>
+	              
+	              <tr>
+	                <th>
+	                  Media cuadr&aacute;tica viento
+	                </th>
+	                <td>
+	                  $year.wind.rms
+	                </td>
+	              </tr>
+	
+	              <tr>
+	                <th>
+	                  Velocidad media del vector<br/>
+	                  Direcci&oacute;n media del vector
+	                </th>
+	                <td>
+	                  $year.wind.vecavg<br/>
+	                  $year.wind.vecdir
+	                </td>
+	              </tr>
+	              <tr>
+	                <th>
+	                  Temperatura interior m&aacute;xima<br/>
+	                  Temperatura interior m&iacute;nima
+	                </th>
+	                <td>
+	                  $year.inTemp.max el $year.inTemp.maxtime<br/>
+	                  $year.inTemp.min el $year.inTemp.mintime
+	                </td>
+	              </tr>
+	              #if $year.UV.has_data
+	              <tr>
+	                <th>
+	                  Radiaci&oacute;n ultravioleta m&aacute;xima<br/>
+	                  Radiaci&oacute;n ultravioleta m&iacute;nima
+	                </th>
+	                <td>
+	                  $year.UV.max el $year.UV.maxtime<br/>
+	                  $year.UV.min el $year.UV.mintime
+	                </td>
+	              </tr>
+	              #end if
+	              #if $year.ET.has_data and $year.ET.sum.raw >0.0
+	              <tr>
+	                <th>
+	                  Evapotranspiraci&oacute;n m&aacute;xima<br/>
+	                  Evapotranspiraci&oacute;n m&iacute;nima
+	                </th>
+	                <td>
+	                  $year.ET.max el $year.ET.maxtime<br/>
+	                  $year.ET.min el $year.ET.mintime
+	                </td>
+	              </tr>
+	              #end if
+	              #if $year.radiation.has_data
+	              <tr>
+	                <th>
+	                  Radiaci&oacute;n m&aacute;xima<br/>
+	                  Radiaci&oacute;n m&iacute;nima
+	                </th>
+	                <td>
+	                  $year.radiation.max el $year.radiation.maxtime<br/>
+	                  $year.radiation.min el $year.radiation.mintime
+	                </td>
+	              </tr>
+	              #end if
+	            </tbody>
+	          </table>
+	          
+            <h3>Precipitaci&oacute;n anual (desde el 1-$station.rain_year_str)</h3>
+	          <table  class="table table-striped mitad">
+	            <tbody>
+	              <tr>
+	                <th>
+	                  Precipitaci&oacute;n anual
+	                </th>
+	                <td>
+	                  $rainyear.rain.sum
+	                </td>
+	              </tr>
+	              <tr>
+	                <th> 
+	                  High Rain Rate
+	                </th>
+	                <td>
+	                  $rainyear.rainRate.max el $rainyear.rainRate.maxtime
+	                </td>
+	              </tr>
+	            </tbody>
+	          </table>
+        </div>
+        
+        <!-- MAIN CONTENT--> 
+        <div class="col-md-8">
+            <h3>
+              Gr&aacute;ficos de este a&nacute;o
+            </h3>
+		          <img src="yeartempdew.png" alt="temperatures"  class="img-plot"/>
+		          <img src="yearhumidity.png?${$station.os_uptime}"   alt="humdedad" class="img-plot"/>		          
+		          <img src="yeartempchill.png" alt="heatchill"  class="img-plot"/>
+		          <img src="yearhilow.png" alt="Daily highs and lows for the year" title="Daily highs and lows for the year" class="img-plot"/>
+		          <img src="yearrain.png" alt="rain"  class="img-plot"/>
+		          <img src="yearwind.png" alt="wind"  class="img-plot"/>
+		          <img src="yearbarometer.png" alt="barometer" class="img-plot"/>
+		          <img src="yearwinddir.png" alt="Hi Wind" class="img-plot"/>
+		          <img src="yearinside.png" alt="Inside" class="img-plot"/>
+		          <img src="yearwindvec.png" alt="Wind Vector" class="img-plot" />
+		          #if $year.radiation.has_data
+		          <img src="yearradiation.png" alt="Radiation" class="img-plot" />
+		          #end if
+		          #if $year.UV.has_data
+		          <img src="yearuv.png" alt="UV Index" class="img-plot" />
+		          #end if
+		          #if $year.rxCheckPercent.has_data
+		          <img src="yearrx.png" alt="year rx percent" class="img-plot"/>
+		          #end if
+        </div>
+      </div>   

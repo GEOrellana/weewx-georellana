@@ -1,0 +1,138 @@
+#errorCatcher Echo
+##
+## Plantilla Python Cheetah del weewx-skin GeOrllana
+## basado en el estilo de GeoNetwork 3,
+## el tema Lumen de Bootstrap, 
+## el ejemplo de GIBS https://github.com/nasa-gibs/gibs-web-examples
+## y en ejemplos de OpenLayers 3.
+##
+## Sientate libre en usar lo que quieras, es software libre.
+##
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>$station.location Condiciones Meteorol&oacute;gicas Actuales</title>
+    <link rel="stylesheet" href="../../lib/bootstrap/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="../../lib/font-awesome/css/font-awesome.min.css" />
+    <link rel="icon" type="image/png" href="../../img/logos/favicon.ico" />
+    <script src="../../lib/jquery.min.js"></script>    
+    <script src="../../lib/bootstrap/js/bootstrap.min.js"></script>
+    <script src="weewx.js"></script>
+    <link rel="stylesheet" href="../../apps.css"/>
+  </head>
+
+  <body>
+  <div class="container-fluid">
+		<!-- NAVEGACION -->
+      <nav class="navbar navbar-fixed-top navbar-default" role="navigation">
+        <div class="container-fluid">
+          <div class="navbar-header">
+            <button class="navbar-toggle" type="button" data-toggle="collapse" data-target=".navbar-collapse">
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+            </button>
+          </div>
+          <div class="collapse navbar-collapse">
+            <ul class="nav navbar-nav">
+              <li>
+                <a href="../../../portal/srv/spa/catalog.search#/home"><img class="gn-logo" src="../../../img/logos/logo.png"><span>Geoportal GeOrellana</span></a>
+              </li>
+              <li>
+                <a href="../../../portal/srv/spa/catalog.search#/search"><i class="fa fa-search"></i> Buscar</a>
+              </li>
+              <li>
+                <a href="../../../portal/srv/spa/catalog.search#/map"><i class="fa fa-globe"></i> Mapa</a>
+              </li>
+					<li class="dropdown active">
+			          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false"><i class="fa fa-eye" aria-hidden="true"></i> Apps <span class="caret"></span></a>
+			          <ul class="dropdown-menu" role="menu">
+			            <li class="active"><a href="../"><i class="fa fa-bolt"></i> Meteo</a></li>
+			            <li><a href="#"><i class="fa fa-industry" aria-hidden="true"></i> Inspecciones Ambientales</li></a>
+							<li><a href="#"><i class="fa fa-line-chart" aria-hidden="true"></i> Monitoreo Ambiental</li></a>
+			          </ul>
+					</li>
+              <li>
+                <a href="../../../wiki/doku.php?id=start" ><i class="fa fa-location-arrow"></i> Wiki</a>  
+              </li>
+            </ul>
+          </div>
+        </div>
+      </nav> 
+      
+      <!-- TITULO --> 
+      <div class="container-fluid title">   
+  		    <div id="title">
+      </div>
+      
+  
+      <!-- PAGINA -->
+      
+      <div>
+        <ul id="myTabs" class="nav nav-tabs responsive" role="tablist">
+  		  		<li class="" role="presentation">
+					<a id="day-tab" aria-expanded="false" aria-controls="day" data-toggle="tab" role="tab" href="#daytab">Actual y hoy</a>
+				</li>
+  		  		<li class="" role="presentation">
+					<a id="week-tab" aria-expanded="false" aria-controls="week" data-toggle="tab" role="tab" href="#weektab">Semana</a>
+				</li>
+  		  		<li class="" role="presentation">
+					<a id="month-tab" aria-expanded="false" aria-controls="month" data-toggle="tab" role="tab" href="#monthtab">Mes</a>
+				</li>
+  		  		<li class="" role="presentation">
+					<a id="year-tab" aria-expanded="false" aria-controls="year" data-toggle="tab" role="tab" href="#yeartab">A&ntilde;o</a>
+				</li>
+				<li class="dropdown" role="presentation">
+              <a href="#" data-toggle="dropdown" class="dropdown-toggle" aria-controls="myTabDrop1-contents">Resumen mensual <span class="caret"></span></a>
+              <ul class="dropdown-menu" id="myTabDrop1-contents">
+                #for $monthYear in $SummaryByMonth
+                <li><a href="NOAA/NOAA-${monthYear}.txt" target="_blank">$monthYear</a></li>
+                #end for
+              </ul>				
+				</li>
+				<li class="dropdown" role="presentation">
+					<a href="#" data-toggle="dropdown" class="dropdown-toggle" aria-controls="myTabDrop2-contents">Resumen anual <span class="caret"></span></a>
+                <ul class="dropdown-menu" id="myTabDrop2-contents">
+                 #for $yr in $SummaryByYear
+                 <li><a href="NOAA/NOAA-${yr}.txt" target="_blank">$yr</a></li>
+                 #end for
+                </ul>				
+				</li>
+  		  		<li class="" role="presentation">
+					<a id="sun-moon-tab" aria-expanded="false" aria-controls="sunmoon" data-toggle="tab" role="tab" href="#sunmoontab">Sol y luna</a>
+				</li>
+  		  		<li class="" role="presentation">
+					<a id="station-tab" aria-expanded="false" aria-controls="station" data-toggle="tab" role="tab" href="#stationtab">La Estaci&oacute;n</a>
+				</li>
+		  </ul>
+  		  
+  		  <div id="myTabContent" class="tab-content responsive">
+  			 <div id="daytab" class="tab-pane fade" aria-labelledby="home-tab" role="tabpanel">
+			   <div id="day"></div>
+			 </div>
+  			 <div id="weektab" class="tab-pane fade" aria-labelledby="week-tab" role="tabpanel">
+			   <div id="week"></div>
+			 </div>
+  			 <div id="monthtab" class="tab-pane fade" aria-labelledby="month-tab" role="tabpanel">
+			   <div id="month"></div>
+			 </div>
+			 <div id="yeartab" class="tab-pane fade" aria-labelledby="year-tab" role="tabpanel">
+			   <div id="year"></div>
+			 </div>
+			 <div id="sunmoontab" class="tab-pane fade" aria-labelledby="sun-moon-tab" role="tabpanel">
+			   <div id="sunmoon"></div>
+			 </div>
+			 <div id="stationtab" class="tab-pane fade" aria-labelledby="station-tab" role="tabpanel">
+			   <div id="station"></div>
+			 </div>
+  		  </div>
+      
+    </div> 
+      
+   <!-- FOOTER -->
+   <div id="footer"></div>
+  </body>
+</html>

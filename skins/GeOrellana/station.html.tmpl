@@ -1,0 +1,74 @@
+#errorCatcher Echo
+      <!-- PAGINA -->
+  		<div class="row-fluid">
+  		
+  		    <!-- SIDEBAR -->
+  		    <div class="col-md-8"> 
+
+  		    <!-- ABOUT -->
+            <h3>Acerca de la estaci&oacute;n</h3>
+            <table class="table table-striped">
+              <tbody>
+              <tr>
+                <th>Ubicaci&oacute;n</th>
+                <td>
+                La estaci&oacute;n est&aacute; ubicado en el centro de la ciudad El Coca, Orellana, Ecuador.
+                	<ul>
+                		<li>Latitude: $station.latitude[0]&deg; $station.latitude[1]' $station.latitude[2]</li>
+                		<li>Longitude: $station.longitude[0]&deg; $station.longitude[1]' $station.longitude[2]</li>
+                		<li>Altitude: $station.altitude</li>
+                	</ul>
+                </td>
+              </tr>
+              <tr>
+               <th>Metadato</th>
+               <td>
+              		<ul>
+              			<li><a href="https://geo.gporellana.gob.ec/portal/srv/spa/catalog.search#/metadata/63338dda-b1c5-4388-9e6f-c6bc93cb1fdf" target="_blank">Geoportal GeOrellana</a></li>
+              			<li><a href="https://geo.gporellana.gob.ec/portal/srv/spa/md.format.pdf?xsl=full_view&uuid=63338dda-b1c5-4388-9e6f-c6bc93cb1fdf" target="_blanc">PDF</a></li>
+              			<li><a href="https://geo.gporellana.gob.ec/portal/srv/spa/xml.metadata.get?uuid=63338dda-b1c5-4388-9e6f-c6bc93cb1fdf" target="_blank">XML</a></li>
+              		</ul>
+               </td>
+              </tr>
+              <tr>
+              	<th>Servicios Web Geoespaciales</th>
+              	<td>
+              		<ul>
+              			<li>Servicio web de mapas (WMS)</li>
+              			<li>Servicio web de fen&oacute;menos (WFS)</li>
+              			<li>Servicio de observaci&oacute;n de sensores (SOS)</li>
+              		</ul>
+              	</td> 
+              </tr>
+              <tr>
+                <th>Mapas web</th>
+                <td>
+                	<ul>
+                		<li>Cliente web de observaci&oacute;n de sensores</li>
+                		<li>Google Earth</li>
+              		<ul>
+              	  </td>
+              </tr>
+              <tr>
+                <th>La estaci&oacute;n</th>
+                <td>
+                Las estaci&oacute;n meteorol&oacute;gica es del modelo DAVIS Vantage Pro 2. 	
+                </td>
+              </tr>
+              <tr>
+                <th>El sistema</th>
+                <td>
+                	En la <a href="https://geo.gporellana.gob.ec/wiki/doku.php?id=administracion:meteo" target="_blank">Wiki GeOrellana</a> pueden encuentrar informaci&oacute;n detallada relacionada con la arquitectura del sistema, los componentes software y hardware empleados, as&iacute; como su integraci&oacute;n y configuraci&oacute;n. 
+              	  </td>
+              </tr>
+            </table>
+  		    </div>
+  		    
+  		    <div class="col-md-4"> 
+  		      <h4><i class="fa fa-image" /> Foto de la estaci&oacute;n</h4>
+  		      <img class="img-thumbnail" src="station.jpg" alt="Estaci&oacute;n meteorol&oacute;gica">
+  		      <br><br>
+  		      <h4><i class="fa fa-map-marker" /> Mapa de la ubicaci&oacute;n</h4>
+  		      <img class="img-thumbnail" src="mapa.jpg" alt="Mapa ubicaci&oacute;n">
+  		    </div>   
+      </div>
