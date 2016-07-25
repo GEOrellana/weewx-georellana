@@ -1,12 +1,27 @@
-#errorCatcher Echo   
+#errorCatcher Echo
    <div class="row-fluid">
-   <div class="col-md-12"> 
-  	  <p class="footer">
-        <i class="fa fa-compass"></i> Latitude: $station.latitude[0]&deg; $station.latitude[1]' $station.latitude[2] 
-        <i class="fa fa-compass"></i> Longitude: $station.longitude[0]&deg; $station.longitude[1]' $station.longitude[2]  
-        <i class="fa fa-arrows-v"></i> Altitude: $station.altitude <br>
-        <i class="fa fa-play-circle"></i> Station software uptime:  $station.uptime 
-        <i class="fa fa-play-circle-o"></i> Server uptime: $station.os_uptime
+   <div class="col-md-12">
+          <p class="footer">
+        <i class="fa fa-compass"></i> Latitud: $station.latitude[0]&deg; $station.latitude[1]' $station.latitude[2]
+        <i class="fa fa-compass"></i> Longitud: $station.longitude[0]&deg; $station.longitude[1]' $station.longitude[2]
+        <i class="fa fa-arrows-v"></i> Altitud: $station.altitude <br>
+        <i class="fa fa-play-circle"></i> Tiempo en funcinamiento software estaci&oacute;n (weewx):  $station.uptime
+        <i class="fa fa-play-circle-o"></i> Tiempo en funcionamiento sistema operativo estaci&oacute;n (debian/rasbian): $station.os_uptime
+        <i class="fa fa-battery-half"></i> Voltaje de la consola: $current.consBatteryVoltage. Estado de la batter&iacute;a sensor remoto: <span id="batStat"></span>
+        <script type="text/javascript">
+                <!--
+                var txBatStat;
+                txBatStat = $current.txBatteryStatus;
+                //console.log( txBatStat );
+                if (txBatStat == 1){
+                        document.getElementByID('batStat').innerHTML =" <b>Batter&iacute;a baja</b>";
+                }
+                else if (txBatStat == 0){
+                        document.getElementById('batStat').innerHTML =" OK";
+                }
+                //-->
+        </script>
       </p>
     </div>
    </div>
+
